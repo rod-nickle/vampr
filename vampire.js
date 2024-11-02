@@ -51,26 +51,69 @@ class Vampire {
   // * when comparing Ansel and Sarah, Ansel is the closest common anscestor.
   // * when comparing Ansel and Andrew, Ansel is the closest common anscestor.
   closestCommonAncestor(vampire) {
-    // If they are the same vampire, exit immediately.
-    if (this.name === vampire.name) {
-      return this;
-    }
-
     let thisCurrentVampire = this;
   
-
     // Go up the tree for this vampire.
     while (thisCurrentVampire) {
       // Go up the tree for the other vampire.
       let otherCurrentVampire = vampire;
       while (otherCurrentVampire) {
-        if (thisCurrentVampire.name === otherCurrentVampire.name) {
+        if (thisCurrentVampire === otherCurrentVampire) {
           return thisCurrentVampire;
         }
         otherCurrentVampire = otherCurrentVampire.creator;
       }
       thisCurrentVampire = thisCurrentVampire.creator;
     }
+  }
+
+  // Returns the vampire object with that name, or null if no vampire exists with that name
+  vampireWithName(name) {
+    if (this.name === name) {
+      return this;
+    }
+
+    for (const vampire of this.offspring) {
+      const foundVampire = vampire.vampireWithName(name);
+
+      if (foundVampire) {
+        return foundVampire;
+      }
+    }
+
+    return null;
+  }
+
+ 
+  // Returns the total number of vampires that exist
+  get totalDescendents() {
+    let totalDescendentsCount = 0;
+    
+    totalDescendentsCount += this.offspring.length;
+    
+    // Use depth first traversal to calculate the total descendents
+    for (const vampire of this.offspring) {
+      totalDescendentsCount += vampire.totalDescendents;
+    }
+
+    return totalDescendentsCount;
+  }
+  
+  // Returns an array of all the vampires that were converted after 1980
+  get allMillennialVampires() {
+    const millenialConvertedYear = 1980;
+    let vampires = [];
+
+    if (this.yearConverted > millenialConvertedYear) {
+      vampires.push(this);
+    }
+
+    for (const vampire of this.offspring) {
+      const millennialVampires = vampire.allMillennialVampires;
+      vampires = vampires.concat(millennialVampires);
+    }
+
+    return vampires;
   }
 }
 

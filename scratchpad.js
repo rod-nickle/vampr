@@ -4,7 +4,7 @@ original = new Vampire("Original", 1900);
 ansel = new Vampire("Ansel", 1930);
 bart = new Vampire("Bart", 1932);
 elgort = new Vampire("Elgort", 1960);
-sarah = new Vampire("Sarah", 1962);
+sarah = new Vampire("Sarah", 1981);
 andrew = new Vampire("Andrew", 2000);
 
 original.addOffspring(ansel);
@@ -35,9 +35,18 @@ elgort.addOffspring(andrew);
 // console.log("Ansel and Ansel: ", ansel.closestCommonAncestor(ansel));
 // console.log("Ansel and Sarah: ", ansel.closestCommonAncestor(sarah));
 // console.log("Ansel and Andrew: ", ansel.closestCommonAncestor(andrew));
-console.log("Ansel and Bart: ", ansel.closestCommonAncestor(bart));
-console.log("Sarah and Bart: ", sarah.closestCommonAncestor(bart));
+// console.log("Ansel and Bart: ", ansel.closestCommonAncestor(bart));
+// console.log("Sarah and Bart: ", sarah.closestCommonAncestor(bart));
  
 // console.log("Orginal: ", original.getAncestors());
 // console.log("Ansel: ", ansel.getAncestors());
 // console.log("Elgort: ", elgort.getAncestors());
+
+// console.log(original.vampireWithName("Original"))
+// console.log(original.vampireWithName("Andrew"))
+
+// console.log(original.totalDescendents);
+// console.log(ansel.totalDescendents);
+// console.log(andrew.totalDescendents);
+
+console.log(original.allMillennialVampires);
